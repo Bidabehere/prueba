@@ -1,7 +1,9 @@
 <?php 
-interface iItem{
-	public function all_items();
-	public function get_item($item_id);
-	public function add_item($iName, $iPrice, $type_id, $code, $brand, $grams);
-	public function edit_item($item_id, $iName, $iPrice, $type_id, $code, $brand, $grams);
-}//end iItem
+interface iProducto{
+	public function all_productos();
+	public function get_producto($id_producto);
+	public function edit_producto($id_producto, $iCant, $iName);
+	public function add_producto($iCant, $iName);
+
+	
+}//end 

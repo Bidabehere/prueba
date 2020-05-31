@@ -14,14 +14,13 @@ $('#add-new-user').click(function(event) {
 $(document).on('submit', '#form-user', function(event) {
     event.preventDefault();
 
+    /* Informacion tomada del formulario */
 
-    /* Act on the event */
-
-    var iName = $('#item-name').val();
-    var iApe = $('#item-ape').val();
-    var iDNI = $('#item-dni').val();
-    var submit = $('#submit-item').val();
-
+    var iName = $('#item-nombre').val();
+    var iApe = $('#item-apellido').val();
+    var iDNI = $('#item-nrodocumento').val();
+    var submit = $('#submit-user').val();
+    var id_usuario = $('#item-id-usuario').val();
 
     if (submit == "edit") {
         $.ajax({
@@ -31,22 +30,27 @@ $(document).on('submit', '#form-user', function(event) {
             data: {
                 iName,
                 iApe,
-                iDNI
+                iDNI,
+                id_usuario
             },
             success: function(data) {
                 // console.log(data);
                 if (data.valid == true) {
                     $('#modal-message').find('#msg-body').text(data.msg);
-                    $('#modal-item').modal('hide');
-                    showAllItem();
+                    $('#modal-user').modal('hide');
+                    showAllUsers();
                     $('#modal-message').modal('show');
+                } else {
+                    $('#modal-message').find('#msg-body').text(data.msg);
+                    $('#modal-message').modal('show');
+
                 }
             },
             error: function() {
-                eMsg('127');
+                alert('127');
             }
         });
-    } //end submit
+    } //end edit
     else if (submit == "add") {
         $.ajax({
             url: 'data/add_user.php',
@@ -61,20 +65,82 @@ $(document).on('submit', '#form-user', function(event) {
                 // console.log(data);
                 if (data.valid == true) {
                     $('#modal-message').find('#msg-body').text(data.msg);
-                    $('#modal-item').modal('hide');
-                    showAllItem();
+                    $('#modal-user').modal('hide');
+                    showAllUsers();
                     $('#modal-message').modal('show');
+                } else {
+                    $('#modal-message').find('#msg-body').text(data.msg);
+                    $('#modal-message').modal('show');
+
                 }
             },
             error: function() {
-                eMsg('127');
+                //eMsg('127');
             }
         });
-    } //end submit
+    } //end add
 });
 
+//temina la creacion y modificacion de usuarios.
+
+$("#modal-user").on('hidden.bs.modal', function() {
+    //alert("Esta accion se ejecuta al cerrar el modal")
+    vaciar_modal_user()
+
+});
+
+function vaciar_modal_user() {
+    $('#item-nombre').val('');
+    $('#item-apellido').val('');
+    $('#item-nrodocumento').val('');
+    $('#submit-user').val('');
+    $('#item-id-usuario').val('');
+}
+
+function editModalUser(id_usuario) {
 
 
+
+    // $('#submit-item').val('add');
+    $.ajax({
+        url: 'data/get_user.php',
+        type: 'post',
+        dataType: 'json',
+        data: {
+            id_usuario
+        },
+        success: function(data) {
+            $('#modal-user').find('.modal-title').val(data.titulo);
+            $('#item-nombre').val(data.nombre);
+            $('#item-apellido').val(data.apellido);
+            $('#item-nrodocumento').val(data.documento);
+            $('#item-id-usuario').val(data.id_usuarios);
+            $('#submit-user').val(data.evento);
+            $('#modal-user').modal('show');
+        },
+        error: function() {
+            alert('Error: L56+');
+        }
+    });
+} //end editModal
+
+
+//Mostrar todos los usuarios
+
+function showAllUsers() {
+    $.ajax({
+        url: 'data/all_user.php',
+        type: 'post',
+        success: function(data) {
+            $('#all-user').html(data);
+        },
+        error: function() {
+            eMsg('Error llamar al administrador');
+            //console.log('Fallo llamada ajax all_user.php')
+        }
+    });
+} //fin show user
+showAllUsers();
 
 
 /***
@@ -84,6 +150,139 @@ $(document).on('submit', '#form-user', function(event) {
  * 
  * 
  */
+
+//Mostrar todos los usuarios
+
+function showAllproductos() {
+    $.ajax({
+        url: 'data/all_producto.php',
+        type: 'post',
+        success: function(data) {
+            $('#all-producto').html(data);
+        },
+        error: function() {
+            eMsg('Error llamar al administrador');
+            //console.log('Fallo llamada ajax all_producto.php')
+        }
+    });
+} //fin show user
+showAllproductos();
+
+$('#add-new-product').click(function(event) {
+    /* Act on the event */
+    $('#modal-product').find('.modal-title').text('Agregar Producto');
+    $('#modal-product').modal('show');
+    $('#submit-product').val('add');
+});
+
+$(document).on('submit', '#form-product', function(event) {
+    event.preventDefault();
+
+    /* Informacion tomada del formulario */
+
+    var iName = $('#item-nombre').val();
+    var iCant = $('#item-cantidad').val();
+    var submit = $('#submit-product').val();
+    var id_producto = $('#item-id-producto').val();
+
+
+    if (submit == "edit") {
+
+        $.ajax({
+            url: 'data/edit_producto.php',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                iName,
+                iCant,
+                id_producto
+            },
+            success: function(data) {
+                // console.log(data);
+                if (data.valid == true) {
+                    $('#modal-message').find('#msg-body').text(data.msg);
+                    $('#modal-product').modal('hide');
+                    showAllproductos();
+                    $('#modal-message').modal('show');
+                } else {
+                    $('#modal-message').find('#msg-body').text(data.msg);
+                    $('#modal-message').modal('show');
+
+                }
+            },
+            error: function() {
+                alert('No se pudo editar');
+            }
+        });
+    } //end edit
+    else if (submit == "add") {
+
+        $.ajax({
+            url: 'data/add_producto.php',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                iName,
+                iCant
+            },
+            success: function(data) {
+
+                if (data.valid == true) {
+                    $('#modal-message').find('#msg-body').text(data.msg);
+                    $('#modal-product').modal('hide');
+                    showAllproductos();
+                    $('#modal-message').modal('show');
+                } else {
+                    $('#modal-message').find('#msg-body').text(data.msg);
+                    $('#modal-message').modal('show');
+
+                }
+            },
+            error: function() {
+                alert('No se pudo agregar el producto')
+            }
+        });
+    } //end add
+});
+
+//temina la creacion y modificacion de usuarios.
+
+$("#modal-product").on('hidden.bs.modal', function() {
+    //alert("Esta accion se ejecuta al cerrar el modal")
+    vaciar_modal_product()
+
+});
+
+function vaciar_modal_product() {
+    $('#item-nombre').val('');
+    $('#item-cantidad').val('');
+    $('#item-id-producto').val('');
+    $('#submit-product').val('');
+}
+
+function editModalProduct(id_producto) {
+
+    // $('#submit-item').val('add');
+    $.ajax({
+        url: 'data/get_producto.php',
+        type: 'post',
+        dataType: 'json',
+        data: {
+            id_producto
+        },
+        success: function(data) {
+            $('#modal-user').find('.modal-title').val(data.titulo);
+            $('#item-nombre').val(data.nombre);
+            $('#item-cantidad').val(data.cantidad);
+            $('#item-id-producto').val(data.id_producto);
+            $('#submit-product').val(data.evento);
+            $('#modal-product').modal('show');
+        },
+        error: function() {
+            alert('Error: L56+');
+        }
+    });
+} //end editModal
 
 
 
@@ -95,3 +294,19 @@ $(document).on('submit', '#form-user', function(event) {
  * 
  * 
  */
+
+
+function showAllGuias() {
+    $.ajax({
+        url: 'data/all_guias.php',
+        type: 'post',
+        success: function(data) {
+            $('#all-guias').html(data);
+        },
+        error: function() {
+            eMsg('Error llamar al administrador');
+            //console.log('Fallo llamada ajax all_guias.php')
+        }
+    });
+} //fin show user
+showAllGuias();

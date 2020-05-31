@@ -1,9 +1,7 @@
 <?php 
-    require_once('../class/Clientes.php');
-    $items = $item->all_items();
-    // echo '<pre>';
-    //     print_r($items);
-    // echo '</pre>';
+    require_once('../class/Producto.php');
+    $productos = $producto->all_productos();
+    
  ?>
 <br />
 <div class="table-responsive">
@@ -12,28 +10,21 @@
                 <tr>
                     <th>Código</th>
                     <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Domicilio</th>
-                    <th>Telefono</th>
-                    <th>Tipo Documento</th>
-					<th>Nro Documento</th>
+                    <th>Total</th>
 					<th>
                         <center>Acciones</center>
                     </th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach($items as $it): ?>
+                <?php foreach($productos as $it): ?>
                     <tr align="center">
-                        <td align="left"><?= $it['item_code']; ?></td>
-                        <td align="left"><?= ucwords($it['item_name']); ?></td>
-                        <td align="left"><?= $it['item_brand']; ?></td>
-                        <td align="left"><?= $it['item_type_desc']; ?></td>
-                        <td><?= $it['item_grams']; ?></td>
-                        <td><?= "$ ".number_format($it['item_price'], 2); ?></td>
+                        <td align="left"><?php echo $it['id_producto']; ?></td>
+                        <td align="left"><?php echo $it['nombre_producto']; ?></td>
+                        <td align="left"><?php echo $it['total_producto']; ?></td>
                         <td>
                            <center>
-                               <button onclick="editModal('<?= $it['item_id']; ?>');" type="button" class="btn btn-warning btn-xs">Editar
+                               <button onclick="editModalProduct('<?php echo $it['id_producto']; ?>');" type="button" class="btn btn-warning btn-xs">Editar
                                 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                 </button>
                            </center>
@@ -56,5 +47,5 @@
 </script>
 
 <?php 
-$item->Disconnect();
+$producto->Disconnect();
  ?>

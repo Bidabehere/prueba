@@ -16,13 +16,13 @@
                         <a href="home.php"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></i> Inicio</a>
                     </li>
                     <li class="<?php if (isset($home_usuario)){echo "active";}?>">
-                        <a href="usuarios.php"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></i> Usuarios</a>
+                        <a href="usuarios.php"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></i> Usuarios</a>
                     </li>
                     <li class="<?php if (isset($home_producto)){echo "active";}?>">
-                        <a href="producto.php"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></i> Productos</a>
+                        <a href="producto.php"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></i> Productos</a>
                     </li>
                     <li class="<?php if (isset($home_guia)){echo "active";}?>">
-                        <a href="guia.php"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></i> Guias</a>
+                        <a href="guia.php"><span class="glyphicon glyphicon-list" aria-hidden="true"></span></i> Guias</a>
                     </li>
                 </ul>
             </div>

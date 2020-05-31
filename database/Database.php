@@ -30,6 +30,19 @@ class Database extends Connection{
 
 	}//end getRow
 
+	//exist row
+	public function existRow($query, $params = []){
+		try {
+			$stmt = $this->datab->prepare($query);
+			$stmt->execute($params);
+			return $stmt->rowCount();	
+		} catch (PDOException $e) {
+			throw new Exception($e->getMessage());	
+		}
+
+
+	}//end getRow
+
 	//get rows
 	public function getRows($query, $params = []){
 		try {

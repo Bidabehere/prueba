@@ -1,69 +1,32 @@
 <?php 
 require_once('../class/User.php');
-$stockList = $stock->all_stockList();
 
- echo '<pre>';
-     print_r($stockList);
- echo '</pre>';
- ?>
-<br />
-<div class="table-responsive">
-        <table id="myTable-users" class="table table-bordered table-hover table-striped">
-            <thead>
-                <tr>
-                    <th><center></center></th>
-                    <th>Código</th>
-                    <th>Nombre</th>
-                    <th>Tipo</th>
-                    <th><center>Fabricado</center></th>
-                    <th><center>Comprado</center></th>
-                    <th><center>Precio</center></th>
-                    <th><center>Cantidad</center></th>
-                    <th>Vence</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php 
-                    $dateNow = date('Y-m');
-                    foreach($stockList as $sl): 
-                    $xDate = strtotime($sl['stock_expiry']);
-                    $xDate = date('Y-m', $xDate);
-                    $class = "text-success";
-                    if($xDate == $dateNow){ 
-                        $class = "text-warning";
-                    }
-                ?>
-                    <tr  align="center" class="<?= $class; ?>">
-                        <td><input type="checkbox" name="stock" value="<?= $sl['stock_id']; ?>"></td>
-                        <td align="left"><?= $sl['item_code']; ?></td>
-                        <td align="left"><?= ucwords($sl['item_name']); ?></td>
-                        <td align="left"><?= $sl['item_type_desc']; ?></td>
-                        <td><?= $sl['stock_manufactured']; ?></td>
-                        <td><?= $sl['stock_purchased']; ?></td>
-                        <td><?= "$ ".number_format($sl['item_price'],2); ?></td>
-                        <td><?= $sl['stock_qty']; ?></td>
-                        <td align="left" width="110px;"><?= $sl['stock_expiry']; ?>
-                            <?php if($xDate <= $dateNow): ?>
-                                <span class="label label-danger">!</span>
-                            <?php endif; ?>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-</div>
+if(isset($_POST['iName'])){
+
+    $iName = $_POST['iName'];
+	$iApe = $_POST['iApe'];
+	$iDNI = $_POST['iDNI'];
 
 
-<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+    $existDNI = $user->check_dni($iDNI);
+	
+    if((int)$existDNI == 1){
+        $return['valid'] = false;
+        $return['msg'] = "Verificar el Documento, no puede ser repetido";
+    }
+    else{
+            $saveUser = $user->add_user($iDNI, $iName, $iApe);
+            if($saveUser){
+                $return['valid'] = true;
+                $return['msg'] = "Nuevo usuario agregado con éxito!";
+            }else{
+                $return['valid'] = false;
+            }
+        
+        }
 
-<!-- for the datatable of employee -->
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#myTable-users').DataTable();
-    });
-</script>
 
-<?php 
-$stock->Disconnect();
- ?>
+	echo json_encode($return);
+}//end isset
+
+$user->Disconnect();

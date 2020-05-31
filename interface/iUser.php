@@ -1,7 +1,11 @@
 <?php 
-interface iItem{
-	public function all_items();
-	public function get_item($item_id);
-	public function add_item($iName, $iPrice, $type_id, $code, $brand, $grams);
-	public function edit_item($item_id, $iName, $iPrice, $type_id, $code, $brand, $grams);
-}//end iItem
+interface iUser{
+	public function all_user();
+	public function check_dni($iDNI);
+	public function add_user($iDNI, $iNombre, $iApellido);
+	public function get_user($id_usuario);
+	public function edit_user($id_usuario, $iDNI, $iNombre, $iApellido);
+	
+
+
+}//end iUser

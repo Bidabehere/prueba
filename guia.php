@@ -54,7 +54,7 @@ $home_guia=1;
                 <button class="btn btn-default" id="add-new-item">Agregar Usuario
                     <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
                 </button>
-               <div id="all-user"></div>
+               <div id="all-guias"></div>
 
             </div>
             <!-- /.container-fluid -->

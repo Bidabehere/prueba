@@ -1,21 +1,21 @@
 <?php 
-require_once('../class/Item.php');
-if(isset($_POST['item_id'])){
-	$item_id = $_POST['item_id'];
-	$itemDetails = $item->get_item($item_id);
-	$return['title'] = "Edit Item";
-	$return['event'] = "edit";
-	if($itemDetails > 0){
-		$return['name'] = $itemDetails['item_name'];
-		$return['price'] = $itemDetails['item_price'];
-		$return['id'] = $itemDetails['item_id'];
-		$return['code'] = $itemDetails['item_code'];
-		$return['brand'] = $itemDetails['item_brand'];
-		$return['grams'] = $itemDetails['item_grams'];
-		$return['type'] = $itemDetails['item_type_id'];
+require_once('../class/User.php');
+if(isset($_POST['id_usuario'])){
+
+	$id_usuario = $_POST['id_usuario'];
+	$userDetails = $user->get_user($id_usuario);
+	
+	$return['titulo'] = "Editar Usuario";
+	$return['evento'] = "edit";
+	if($userDetails > 0){
+		$return['nombre'] = $userDetails['nombre'];
+		$return['apellido'] = $userDetails['apellido'];
+		$return['documento'] = $userDetails['documento'];
+		$return['id_usuarios'] = $userDetails['id_usuarios'];
+		
 	}
 	echo json_encode($return);	
 	
 }//end isset
 
-$item->Disconnect();
+$user->Disconnect();

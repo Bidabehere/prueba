@@ -1,22 +1,50 @@
 <?php
 require_once('../database/Database.php');
-require_once('../interface/iUser.php');
-class User extends Database implements iUser {
+require_once('../interface/iProducto.php');
 
-	public function user_login($username, $password)
-	{
+
+class Producto extends Database implements iProducto {
+
+	public function all_productos(){
 		$sql = "SELECT *
-				FROM user 
-				WHERE user_account = ?
-				AND user_pass = ?
-		";
-		return $this->getRow($sql, [$username, $password]);
-	}//end login_user
+				FROM productos 
+				";
+
+		return $this->getRows($sql);	
 	
+	}
 
-}//en class User
+	public function get_producto($id_producto){
+	
+		$sql = "SELECT *
+				FROM productos
+				WHERE id_producto = ?";
+		
+		return $this->getRow($sql, [$id_producto]);
 
-$user = new User();
+	}
+
+	public function edit_producto($id_producto, $iCant, $iName)
+	{
+		$sql = " UPDATE `productos` 
+		SET `nombre_producto` = ? , 
+		`total_producto` = ? 
+		WHERE `productos`.`id_producto` = ?";
+		
+	return $this->updateRow($sql, [$iName, $iCant, $id_producto]);
+	}
+	
+	public function add_producto($iCant, $iName){
+
+		$sql = "INSERT  INTO productos(nombre_producto, total_producto)
+				VALUES(?, ?)";
+	
+		return $this->insertRow($sql, [$iName, $iCant]);
+	}
+
+}//en class 
+
+$producto = new Producto();
 
 /* End of file User.php */
 /* Location: .//D/xampp/htdocs/regis/class/User.php */

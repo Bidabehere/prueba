@@ -1,15 +1,4 @@
-<?php 
-require_once('database/Database.php');
-$db = new Database();
-$sql = "SELECT *
-		FROM item_type
-		ORDER BY item_type_desc ASC";
-$types = $db->getRows($sql);
-// echo '<pre>';
-// 	print_r($types);
-// echo '</pre>';
- ?>
-<div class="modal fade" id="modal-item">
+<div class="modal fade" id="modal-product">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -18,7 +7,7 @@ $types = $db->getRows($sql);
 			</div>
 			<div class="modal-body">
 			
-				<form class="form-horizontal" role="form" id="form-item">
+				<form class="form-horizontal" role="form" id="form-product">
 				<input type="hidden" id="item-id">
 				  <div class="form-group">
 				    <label class="control-label col-sm-3" for="">Nombre:</label>
@@ -27,39 +16,20 @@ $types = $db->getRows($sql);
 				    </div>
 				  </div>
 				  <div class="form-group">
-				    <label class="control-label col-sm-3" for="">Apellido:</label>
+				    <label class="control-label col-sm-3" for="">Total:</label>
 				    <div class="col-sm-9">
-				      <input type="text" maxlength="50" class="form-control" id="item-apellido" placeholder="Ingresa el apellido" required="" autofocus="">
-				    </div>
+				      <input type="number" maxlength="50" class="form-control" id="item-cantidad" placeholder="Ingresa la cantidad" required="" autofocus="">
+					  <input type="text" maxlength="50" class="form-control" id="item-id-producto"  autofocus="">
+					</div>
 				  </div>
-				  <div class="form-group">
-				    <label class="control-label col-sm-3" for="">Domicilio:</label>
-				    <div class="col-sm-9">
-				      <input type="text" maxlength="50" class="form-control" id="item-domicilio" placeholder="Ingresa el domicilio" required="" autofocus="">
-				    </div>
-				  </div>
-				  <div class="form-group">
-				    <label class="control-label col-sm-3" for="">Telefono:</label>
-				    <div class="col-sm-9">
-				      <input type="text" maxlength="50" class="form-control" id="item-telefono" placeholder="Ingresa el telefono" required="" autofocus="">
-				    </div>
-				  </div>
-				  <div class="form-group">
-				    <label class="control-label col-sm-3" for="">Tipo documento:</label>
-				    <div class="col-sm-9">
-				      <input type="text" maxlength="50" class="form-control" id="item-tipodocumento" placeholder="Ingresa tipo documento" required="" autofocus="">
-				    </div>
-				  </div>
-				  <div class="form-group">
-				    <label class="control-label col-sm-3" for="">Nro. documento:</label>
-				    <div class="col-sm-9">
-				      <input type="text" maxlength="50" class="form-control" id="item-nrodocumento" placeholder="Ingresa nro documento" required="" autofocus="">
-				    </div>
-				  </div>
+			
 				  <div class="form-group"> 
 				    <div class="col-sm-offset-2 col-sm-10">
-				      <button type="submit" id="submit-item" value="add" class="btn btn-default">Guardar datos
+				      <button type="submit" id="submit-product" value="add" class="btn btn-default">Guardar datos
 				      <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+				      </button>
+					  <button class="btn btn-default" data-dismiss="modal">Cancelar
+				      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 				      </button>
 				    </div>
 				  </div>
@@ -71,6 +41,3 @@ $types = $db->getRows($sql);
 		</div>
 	</div>
 </div>
-<?php 
-$db->Disconnect();
- ?>

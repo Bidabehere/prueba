@@ -1,39 +1,30 @@
 <?php 
-    require_once('../class/Clientes.php');
-    $items = $item->all_items();
-    // echo '<pre>';
-    //     print_r($items);
-    // echo '</pre>';
+    require_once('../class/User.php');
+    $users = $user->all_user();
+    
  ?>
 <br />
 <div class="table-responsive">
         <table id="myTable-item" class="table table-bordered table-hover table-striped">
             <thead>
                 <tr>
-                    <th>Código</th>
                     <th>Nombre</th>
                     <th>Apellido</th>
-                    <th>Domicilio</th>
-                    <th>Telefono</th>
-                    <th>Tipo Documento</th>
-					<th>Nro Documento</th>
+                    <th>Documento</th>
 					<th>
                         <center>Acciones</center>
                     </th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach($items as $it): ?>
+                <?php foreach($users as $it): ?>
                     <tr align="center">
-                        <td align="left"><?= $it['item_code']; ?></td>
-                        <td align="left"><?= ucwords($it['item_name']); ?></td>
-                        <td align="left"><?= $it['item_brand']; ?></td>
-                        <td align="left"><?= $it['item_type_desc']; ?></td>
-                        <td><?= $it['item_grams']; ?></td>
-                        <td><?= "$ ".number_format($it['item_price'], 2); ?></td>
+                        <td align="left"><?php echo $it['nombre']; ?></td>
+                        <td align="left"><?php echo $it['apellido']; ?></td>
+                        <td align="left"><?php echo $it['documento']; ?></td>
                         <td>
                            <center>
-                               <button onclick="editModal('<?= $it['item_id']; ?>');" type="button" class="btn btn-warning btn-xs">Editar
+                               <button onclick="editModalUser('<?php echo $it['id_usuarios']; ?>');" type="button" class="btn btn-warning btn-xs">Editar
                                 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                 </button>
                            </center>
@@ -56,5 +47,5 @@
 </script>
 
 <?php 
-$item->Disconnect();
+$user->Disconnect();
  ?>

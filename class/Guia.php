@@ -1,23 +1,22 @@
 <?php
 require_once('../database/Database.php');
-require_once('../interface/iUser.php');
-class User extends Database implements iUser {
+require_once('../interface/iGuia.php');
 
-	public function user_login($username, $password)
-	{
-		$sql = "SELECT *
-				FROM user 
-				WHERE user_account = ?
-				AND user_pass = ?
-		";
-		return $this->getRow($sql, [$username, $password]);
-	}//end login_user
+class Guia extends Database implements iGuia {
+
+	public function all_guias(){
+	
+		$sql = "SELECT id_guia, descripcion, numero_guia
+				FROM guia 
+				";
+		return $this->getRows($sql);	
+	}
+
 	
 
-}//en class User
+}//end 
 
-$user = new User();
+$guia = new Guia();
 
-/* End of file User.php */
-/* Location: .//D/xampp/htdocs/regis/class/User.php */
+
 

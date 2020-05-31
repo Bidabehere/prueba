@@ -1,19 +1,22 @@
 <?php 
-require_once('../class/Item.php');
-if(isset($_POST['item_id'])){
-	$item_id = $_POST['item_id'];
+require_once('../class/Producto.php');
+
+if(isset($_POST['id_producto'])){
+
+	$id_producto = $_POST['id_producto'];
+	$iCant = $_POST['iCant'];
 	$iName = $_POST['iName'];
-	$iPrice = $_POST['iPrice'];
-	$iType = $_POST['iType'];
-	$code = $_POST['code'];
-	$brand = $_POST['brand'];
-	$grams = $_POST['grams'];
-	$saveEdit = $item->edit_item($item_id, $iName, $iPrice, $iType, $code, $brand, $grams);
+	
+	$saveEdit = $producto->edit_producto($id_producto, $iCant, $iName);
+	
 	$return['valid'] = false;
+
 	if($saveEdit){
 		$return['valid'] = true;
 		$return['msg'] = "Editado correctamente!";
 	}
+	
 	echo json_encode($return);
+
 }//end isset
-$item->Disconnect();
+$producto->Disconnect();

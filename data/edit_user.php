@@ -1,19 +1,28 @@
 <?php 
-require_once('../class/Item.php');
-if(isset($_POST['item_id'])){
-	$item_id = $_POST['item_id'];
-	$iName = $_POST['iName'];
-	$iPrice = $_POST['iPrice'];
-	$iType = $_POST['iType'];
-	$code = $_POST['code'];
-	$brand = $_POST['brand'];
-	$grams = $_POST['grams'];
-	$saveEdit = $item->edit_item($item_id, $iName, $iPrice, $iType, $code, $brand, $grams);
-	$return['valid'] = false;
-	if($saveEdit){
+require_once('../class/User.php');
+
+if(isset($_POST['id_usuario'])){
+
+    $iName = $_POST['iName'];
+	$iApe = $_POST['iApe'];
+	$iDNI = $_POST['iDNI'];
+	$id_usuario = $_POST['id_usuario'];
+
+
+
+	$saveUser = $user->edit_user($id_usuario, $iDNI, $iName, $iApe);
+	
+	if($saveUser){
 		$return['valid'] = true;
-		$return['msg'] = "Editado correctamente!";
+		$return['msg'] = "Nuevo usuario editado con éxito!";
+	}else{
+		$return['valid'] = false;
 	}
-	echo json_encode($return);
-}//end isset
-$item->Disconnect();
+        
+
+
+echo json_encode($return);
+
+}//end si existe 
+
+$user->Disconnect();
