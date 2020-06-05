@@ -11,7 +11,6 @@
 			<div class="modal-body">
 			
 				<form class="form-horizontal" role="form" id="form-user">
-				<input type="hidden" id="item-id">
 				  <div class="form-group">
 				    <label class="control-label col-sm-3" for="">Nombre:</label>
 				    <div class="col-sm-9">

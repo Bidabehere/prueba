@@ -5,7 +5,9 @@ class Connection{
 	protected $datab;
 	protected $transaction;
 
-	public function __construct($username="root", $password ="", $host="localhost", $dbname="prueba", $options = []){
+	public function __construct($username="u649136458_mensajes", $password ="1979Colador*", $host="213.190.6.43", $dbname="u649136458_mensajes", $options = []){
+
+//	public function __construct($username="root", $password ="", $host="localhost", $dbname="prueba", $options = []){
 		
 		$this->isConn = TRUE;
 		try{

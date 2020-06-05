@@ -20,6 +20,16 @@ class User extends Database implements iUser {
 		return $this->existRow($sql, [$iDNI]);
 
 	}
+	
+	public function check_dni_edit($idUser, $iDNI){
+	
+		$sql = "SELECT *
+				FROM usuarios
+				WHERE documento = ? and id_usuarios = ?";
+		
+		return $this->existRow($sql, [$iDNI, $idUser]);
+
+	}
 
 	public function add_user($iDNI, $iNombre, $iApellido){
 		
@@ -40,14 +50,23 @@ class User extends Database implements iUser {
 
 	}
 
-	public function edit_user($id_usuario, $iDNI, $iNombre, $iApellido){
+	public function edit_user($id_usuario, $iDNI, $iNombre, $iApellido){ 
 			
-		$sql = " UPDATE IGNORE `usuarios` 
+		$sql = " UPDATE `usuarios` 
 				SET `nombre` = ? , `apellido` = ? ,
 				`documento` = ? 
 				WHERE `usuarios`.`id_usuarios` = ?";
 				
 		return $this->updateRow($sql, [$iNombre, $iApellido, $iDNI, $id_usuario]);
+	}
+	
+	public function	edit_user_sin_dni($id_usuario, $iNombre, $iApellido){
+
+		$sql = " UPDATE `usuarios` 
+				SET `nombre` = ? , `apellido` = ? 
+				WHERE `usuarios`.`id_usuarios` = ?";
+				
+		return $this->updateRow($sql, [$iNombre, $iApellido, $id_usuario]);
 	}
 
 

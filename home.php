@@ -13,7 +13,7 @@ $home_menu=1;
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Inicio - Sistema de Inventario Farmacéutico </title>
+    <title>Inicio - Sistema </title>
 
     <!-- Bootstrap Core CSS -->
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
@@ -67,10 +67,6 @@ $home_menu=1;
     <!-- /#wrapper -->
 
 
-<?php include_once('modal/to_cart.php'); ?>
-<?php include_once('modal/confirmation.php'); ?>
-<?php include_once('modal/add_new_item.php'); ?>
-<?php include_once('modal/message.php'); ?>
 
     <script type="text/javascript" src="assets/js/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="assets/js/jquery-1.12.3.js"></script>

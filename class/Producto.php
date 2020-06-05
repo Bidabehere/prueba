@@ -42,10 +42,9 @@ class Producto extends Database implements iProducto {
 		return $this->insertRow($sql, [$iName, $iCant]);
 	}
 
-}//en class 
+}
 
 $producto = new Producto();
 
-/* End of file User.php */
-/* Location: .//D/xampp/htdocs/regis/class/User.php */
+
 

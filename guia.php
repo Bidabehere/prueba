@@ -51,7 +51,7 @@ $home_guia=1;
                     </div>
                 </div>
                 <!-- /.row -->
-                <button class="btn btn-default" id="add-new-item">Agregar Usuario
+                <button class="btn btn-default" id="add-new-guia">Agregar Guia
                     <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
                 </button>
                <div id="all-guias"></div>
@@ -66,7 +66,7 @@ $home_guia=1;
     <!-- /#wrapper -->
 
 
-<?php include_once('modal/add_new_user.php'); ?>
+<?php include_once('modal/add_new_guia.php'); ?>
 <?php include_once('modal/message.php'); ?>
 
 <script type="text/javascript" src="assets/js/jquery-3.1.1.min.js"></script>

@@ -10,6 +10,7 @@ $('#add-new-user').click(function(event) {
     $('#submit-user').val('add');
 });
 
+//uso el mismo modal para editar y para crear un usuario
 
 $(document).on('submit', '#form-user', function(event) {
     event.preventDefault();
@@ -83,6 +84,8 @@ $(document).on('submit', '#form-user', function(event) {
 
 //temina la creacion y modificacion de usuarios.
 
+//cuando ce cierre el modal se limpia
+
 $("#modal-user").on('hidden.bs.modal', function() {
     //alert("Esta accion se ejecuta al cerrar el modal")
     vaciar_modal_user()
@@ -97,11 +100,12 @@ function vaciar_modal_user() {
     $('#item-id-usuario').val('');
 }
 
+// fin clean modal
+
+//Para editar el usuario
 function editModalUser(id_usuario) {
 
 
-
-    // $('#submit-item').val('add');
     $.ajax({
         url: 'data/get_user.php',
         type: 'post',
@@ -110,7 +114,7 @@ function editModalUser(id_usuario) {
             id_usuario
         },
         success: function(data) {
-            $('#modal-user').find('.modal-title').val(data.titulo);
+            $('#modal-user').find('.modal-title').text(data.titulo);
             $('#item-nombre').val(data.nombre);
             $('#item-apellido').val(data.apellido);
             $('#item-nrodocumento').val(data.documento);
@@ -122,7 +126,8 @@ function editModalUser(id_usuario) {
             alert('Error: L56+');
         }
     });
-} //end editModal
+}
+//end editModal
 
 
 //Mostrar todos los usuarios
@@ -151,7 +156,7 @@ showAllUsers();
  * 
  */
 
-//Mostrar todos los usuarios
+//Mostrar todos los Productos
 
 function showAllproductos() {
     $.ajax({
@@ -165,8 +170,11 @@ function showAllproductos() {
             //console.log('Fallo llamada ajax all_producto.php')
         }
     });
-} //fin show user
+} //fin show productos
 showAllproductos();
+
+
+//muestro el modal para crear un producto
 
 $('#add-new-product').click(function(event) {
     /* Act on the event */
@@ -174,6 +182,8 @@ $('#add-new-product').click(function(event) {
     $('#modal-product').modal('show');
     $('#submit-product').val('add');
 });
+
+//Creo y modifico productos con el mismo modal
 
 $(document).on('submit', '#form-product', function(event) {
     event.preventDefault();
@@ -247,6 +257,8 @@ $(document).on('submit', '#form-product', function(event) {
 
 //temina la creacion y modificacion de usuarios.
 
+
+//limpio el modal
 $("#modal-product").on('hidden.bs.modal', function() {
     //alert("Esta accion se ejecuta al cerrar el modal")
     vaciar_modal_product()
@@ -260,6 +272,10 @@ function vaciar_modal_product() {
     $('#submit-product').val('');
 }
 
+//fin limpio modal
+
+//llamo el modal para editar
+
 function editModalProduct(id_producto) {
 
     // $('#submit-item').val('add');
@@ -271,7 +287,7 @@ function editModalProduct(id_producto) {
             id_producto
         },
         success: function(data) {
-            $('#modal-user').find('.modal-title').val(data.titulo);
+            $('#modal-product').find('.modal-title').text(data.titulo);
             $('#item-nombre').val(data.nombre);
             $('#item-cantidad').val(data.cantidad);
             $('#item-id-producto').val(data.id_producto);
@@ -289,12 +305,13 @@ function editModalProduct(id_producto) {
 /**
  * 
  * 
- * Sector ordenes
+ * Sector Guias
  * 
  * 
  * 
  */
 
+//muestro todas las guias
 
 function showAllGuias() {
     $.ajax({
@@ -310,3 +327,69 @@ function showAllGuias() {
     });
 } //fin show user
 showAllGuias();
+
+//llamo el modal para crear una guia
+
+$('#add-new-guia').click(function(event) {
+    /* Act on the event */
+    $('#modal-guia').find('.modal-title').text('Agregar Guia');
+    $('#modal-guia').modal('show');
+    $('#submit-guia').val('add');
+});
+
+$(document).on('submit', '#form-guia', function(event) {
+        event.preventDefault();
+
+        /* Informacion tomada del formulario */
+
+        var idProducto = $('#item-producto-guia').val();
+        var iCant = $('#item-cantidad').val();
+        var iDetalle = $('#item-detalle').val();
+
+        $.ajax({
+            url: 'data/add_guia.php',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                idProducto,
+                iDetalle,
+                iCant
+            },
+            success: function(data) {
+
+                if (data.valid == true) {
+                    $('#modal-message').find('#msg-body').text(data.msg);
+                    $('#modal-guia').modal('hide');
+                    showAllGuias();
+                    $('#modal-message').modal('show');
+                } else {
+                    $('#modal-message').find('#msg-body').text(data.msg);
+                    $('#modal-message').modal('show');
+
+                }
+            },
+            error: function() {
+                alert('No se pudo agregar el producto')
+            }
+        });
+
+    }) //end add
+
+//temina la creacion de guias
+
+
+// limpio modal de las guias
+$("#modal-guia").on('hidden.bs.modal', function() {
+    //alert("Esta accion se ejecuta al cerrar el modal")
+    vaciar_modal_guia()
+
+});
+
+function vaciar_modal_guia() {
+    $('#item-cantidad').val('');
+    $('#item-detalle').val('');
+    $('#submit-guia').val('');
+    $("#item-producto-guia").prop('selectedIndex', 0);
+}
+
+//fin limpio modal guias

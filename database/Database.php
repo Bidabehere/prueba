@@ -72,11 +72,7 @@ class Database extends Connection{
 		return true;
 	}//end updateRow
 
-	//delete row
-	public function deleteRow($query, $params = []){
-		$this->insertRow($query, $params);
-		return true;
-	}//end deleteRow
+
 
 	//get the last inserted ID
 	public function lastID(){
@@ -84,37 +80,6 @@ class Database extends Connection{
 		return $lastID;
 	}//end lastID func
 
-
-	//under construction kay dili pa mo gana!!!!
-	public function transInsert($query, $params = [], $query2, $params2 = []){
-		try {
-			$this->transaction->beginTransaction();
-				$stmt = $this->datab->prepare($query);
-				$stmt->execute($params);
-
-				$stmt2 = $this->datab->prepare($query2);
-				$stmt2->execute($params2);
-
-			$this->transaction->commit();
-		} catch (PDOException $e) {
-			$this->transaction->rollBack();
-			throw new Exception($e->getMessage());	
-		}
-	}//end transac func
-
-
-	public function Begin(){
-		$this->transaction->beginTransaction();
-	}
-
-	public function Commit(){
-		$this->transaction->commit();
-	}
-
-	public function test()
-	{
-		echo 'database class test';
-	}
 }
 
 

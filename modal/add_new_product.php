@@ -8,7 +8,6 @@
 			<div class="modal-body">
 			
 				<form class="form-horizontal" role="form" id="form-product">
-				<input type="hidden" id="item-id">
 				  <div class="form-group">
 				    <label class="control-label col-sm-3" for="">Nombre:</label>
 				    <div class="col-sm-9">
@@ -19,7 +18,7 @@
 				    <label class="control-label col-sm-3" for="">Total:</label>
 				    <div class="col-sm-9">
 				      <input type="number" maxlength="50" class="form-control" id="item-cantidad" placeholder="Ingresa la cantidad" required="" autofocus="">
-					  <input type="text" maxlength="50" class="form-control" id="item-id-producto"  autofocus="">
+					  <input type="hidden" maxlength="50" class="form-control" id="item-id-producto"  autofocus="">
 					</div>
 				  </div>
 			
