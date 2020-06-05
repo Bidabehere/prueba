@@ -21,21 +21,12 @@ class Guia extends Database implements iGuia {
 		return $this->existRow($sql, [$guia]);
 	}
 					
-	public function	add_guia($iCant, $idProducto, $iDetalle){
-		$sql = "INSERT  INTO guia(id_producto, cantidad_producto, descripcion)
-		VALUES(?,?,?)";
+	public function	add_guia($nro_guia, $iCant, $idProducto, $iDetalle){
+		$sql = "INSERT  INTO guia(id_producto, cantidad_producto, descripcion, numero_guia)
+		VALUES(?, ?,?,?)";
 
-		return $this->insertRow($sql, [$idProducto, $iCant, $iDetalle]);
+		return $this->insertRow($sql, [$idProducto, $iCant, $iDetalle, $nro_guia]);
 
-	}
-
-	public function add_nro_guia($nro_guia, $ultimo){
-		
-		$sql = " UPDATE `guia` 
-		SET `numero_guia` = ? 
-		WHERE `guia`.`id_guia` = ?";
-		
-	return $this->updateRow($sql, [$nro_guia, $ultimo]);
 	}
 	
 }//end 

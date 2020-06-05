@@ -10,7 +10,7 @@ if(isset($_POST['idProducto'])){
 		$bandera = true;
 		$vuelta = 0; 
 
-		/* while($bandera){
+		while($bandera){
 			$valor = rand(0,9999);
 			$nro_guia = 'P'.str_pad($valor, 4, '0', STR_PAD_LEFT);
 			$existe_guia = $guia-> check_guia($nro_guia);
@@ -26,19 +26,13 @@ if(isset($_POST['idProducto'])){
 					echo json_encode($return);
 					return;
 				}	
-			
+			 
 			$vuelta++;
 		} // fin del while, si pasa ya tenemos nuestro nro de guia
-	 	*/
+	
 
 	
-	$guia->add_guia($iCant, $idProducto, $iDetalle);
-	
-	$ultimo = $guia -> lastID();
-
-	$nro_guia = 'P'.str_pad($ultimo, 4, '0', STR_PAD_LEFT);
-
-	$saveEdit = $guia ->add_nro_guia($nro_guia, $ultimo);
+	$saveEdit = $guia->add_guia($nro_guia, $iCant, $idProducto, $iDetalle);
 	
 	$return['valid'] = false;
 
